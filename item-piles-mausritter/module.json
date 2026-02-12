@@ -1,7 +1,7 @@
 {
   "id": "item-piles-mausritter",
   "title": "Item Piles: Mausritter",
-  "description": "Compatibilidad de Item Piles con Mausritter (0.3.21).",
+  "description": "Compatibilidad de Item Piles con Mausritter",
   "version": "0.0.1",
   "authors": [{ "name": "Kiryna" }],
   "compatibility": {
@@ -15,4 +15,6 @@
     ]
   },
   "esmodules": ["module.js"]
+  "manifest": "https://raw.githubusercontent.com/kiryna-cpg/item-piles-mausritter/main/module.json",
+  "url": "https://github.com/kiryna-cpg/item-piles-mausritter"
 }
