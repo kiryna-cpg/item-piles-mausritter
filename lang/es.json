@@ -1,1 +1,33 @@
-
+{
+  "IPMR": {
+    "Settings": {
+      "SetupDone": {
+        "Name": "Setup aplicado",
+        "Hint": "Marca interna para evitar sobrescribir ajustes manuales de Item Piles tras el primer setup."
+      }
+    "Currency": {
+        "Pips": "Pips"
+      }
+    },
+    "Menu": {
+      "Reset": {
+        "Name": "Restablecer configuración recomendada",
+        "Hint": "Reaplica la configuración recomendada de Item Piles para Mausritter.",
+        "Label": "Abrir"
+      }
+    },
+    "Dialog": {
+      "Reset": {
+        "Title": "Item Piles: Mausritter | Restablecer configuración",
+        "Body1": "Esto volverá a aplicar la configuración recomendada de Item Piles para Mausritter (moneda, atributo de precio, tipo de actor de pila y no apilar).",
+        "WarningLabel": "Nota:",
+        "WarningText": "Esto sobrescribe los ajustes actuales de Item Piles.",
+        "Cancel": "Cancelar",
+        "Confirm": "Restablecer"
+      }
+    },
+    "Notifications": {
+      "ResetDone": "Item Piles: Mausritter | Configuración recomendada reaplicada."
+    }
+  }
+}
