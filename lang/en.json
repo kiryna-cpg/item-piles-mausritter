@@ -1,5 +1,33 @@
 {
   "IPMR": {
     "Settings": {
-
-::contentReference[oaicite:0]{index=0}
+      "SetupDone": {
+        "Name": "Setup applied",
+        "Hint": "Internal flag to prevent overwriting manual Item Piles settings after the initial setup."
+      }
+    },
+    "Menu": {
+      "Reset": {
+        "Name": "Reset recommended settings",
+        "Hint": "Re-apply the recommended Item Piles configuration for Mausritter.",
+        "Label": "Open"
+      }
+    },
+    "Dialog": {
+      "Reset": {
+        "Title": "Item Piles: Mausritter | Reset configuration",
+        "Body1": "This will re-apply the recommended Item Piles settings for Mausritter (currency, item price attribute, pile actor type, and no stacking).",
+        "WarningLabel": "Note:",
+        "WarningText": "This overwrites your current Item Piles settings.",
+        "Cancel": "Cancel",
+        "Confirm": "Reset"
+      }
+    },
+    "Notifications": {
+      "ResetDone": "Item Piles: Mausritter | Recommended configuration has been re-applied."
+    },
+    "Currency": {
+      "Pips": "Pips"
+    }
+  }
+}
