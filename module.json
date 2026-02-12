@@ -15,7 +15,7 @@
     ]
   },
   "esmodules": ["module.js"]
-  "manifest": "https://raw.githubusercontent.com/kiryna-cpg/item-piles-mausritter/main/module.json",
+  "manifest": "https://raw.githubusercontent.com/kiryna-cpg/item-piles-mausritter/main/module.json"
   "url": "https://github.com/kiryna-cpg/item-piles-mausritter"
   "download": "https://github.com/kiryna-cpg/item-piles-mausritter/releases/download/0.0.2/item-piles-mausritter.zip"
 }
