@@ -60,6 +60,12 @@ This re-applies the recommended configuration and may overwrite current Item Pil
 
 ---
 
+## Localization
+
+This module uses Foundry VTT’s configured language. Text will appear in the same language as your Foundry UI (e.g. Spanish → “Pepitas”, English → “Pips”). The module does not include a separate language setting.
+
+---
+
 ## Compatibility notes
 
 - Mausritter tracks currency as an **actor attribute** (`system.pips.value`), not as a physical “coin item”.
