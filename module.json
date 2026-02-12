@@ -1,13 +1,10 @@
 {
   "id": "item-piles-mausritter",
   "title": "Item Piles: Mausritter",
-  "description": "Compatibilidad de Item Piles con Mausritter",
+  "description": "Companion module that configures Item Piles for Mausritter.",
   "version": "0.0.2",
   "authors": [{ "name": "Kiryna" }],
-  "compatibility": {
-    "minimum": "13",
-    "verified": "13.351"
-  },
+  "compatibility": { "minimum": "13", "verified": "13.351" },
   "relationships": {
     "requires": [
       { "id": "item-piles", "type": "module" },
@@ -15,8 +12,13 @@
     ]
   },
   "esmodules": ["module.js"],
-  "manifest": "https://raw.githubusercontent.com/kiryna-cpg/item-piles-mausritter/main/module.json",
+  "languages": [
+    { "lang": "en", "name": "English", "path": "lang/en.json" },
+    { "lang": "es", "name": "Español", "path": "lang/es.json" }
+  ],
   "url": "https://github.com/kiryna-cpg/item-piles-mausritter",
-  "download": "https://github.com/kiryna-cpg/item-piles-mausritter/releases/download/0.0.2/item-piles-mausritter.zip"
+  "manifest": "https://raw.githubusercontent.com/kiryna-cpg/item-piles-mausritter/main/module.json",
+  "download": "https://github.com/kiryna-cpg/item-piles-mausritter/releases/download/0.0.2/item-piles-mausritter.zip",
+  "bugs": "https://github.com/kiryna-cpg/item-piles-mausritter/issues"
 }
 
