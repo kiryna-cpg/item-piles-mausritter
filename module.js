@@ -1,4 +1,8 @@
-console.log("Item Piles: Mausritter | module.js cargado", { version: "0.0.2", time: Date.now() });
+/* Item Piles: Mausritter
+ * Companion module for Mausritter system integration.
+ */
+
+console.log("Item Piles: Mausritter | module.js loaded", { version: "0.0.2", time: Date.now() });
 
 const MODULE_ID = "item-piles-mausritter";
 
@@ -24,7 +28,7 @@ function recommendedItemPilesSettings() {
     currencies: [
       {
         type: "attribute",
-        name: "Pepitas",
+        name: "Pips",
         primary: true,
         img: "icons/commodities/gems/gem-rough-cushion-white.webp",
         abbreviation: "{#}P",
@@ -32,13 +36,17 @@ function recommendedItemPilesSettings() {
         data: { path: "system.pips.value" }
       }
     ],
+    // Slot inventory: do not stack anything
     unstackableItemTypes: ["item", "weapon", "armor", "storage", "condition", "spell"],
+    // Prevent “merging” by similarity
     itemSimilarities: ["_id"]
   };
 }
 
 async function applyRecommendedSettings({ force = false } = {}) {
   if (game.system.id !== "mausritter") return;
+
+  // Only apply once unless forced
   if (!force && getSetupDoneSafe()) return;
 
   const rec = recommendedItemPilesSettings();
@@ -50,7 +58,7 @@ async function applyRecommendedSettings({ force = false } = {}) {
   await game.settings.set("item-piles", "unstackableItemTypes", rec.unstackableItemTypes);
   await game.settings.set("item-piles", "itemSimilarities", rec.itemSimilarities);
 
-  // Integración opcional
+  // Optional integration (non-critical)
   if (game.itempiles?.API?.addSystemIntegration) {
     try {
       game.itempiles.API.addSystemIntegration(
@@ -64,7 +72,7 @@ async function applyRecommendedSettings({ force = false } = {}) {
         "latest"
       );
     } catch (e) {
-      console.warn("Item Piles: Mausritter | addSystemIntegration falló:", e);
+      console.warn("Item Piles: Mausritter | addSystemIntegration failed (non-critical):", e);
     }
   }
 
@@ -75,48 +83,61 @@ Hooks.once("init", () => {
   try {
     console.log("Item Piles: Mausritter | init START");
 
-game.settings.registerMenu(MODULE_ID, "resetRecommended", {
-  name: "Restablecer configuración recomendada",
-  hint: "Reaplica la configuración recomendada de Item Piles para Mausritter.",
-  label: "Abrir",
-  icon: "fas fa-rotate-left",
-  restricted: true,
-  type: class ResetMenu extends foundry.applications.api.ApplicationV2 {
-    async render() {
-      const html =
-        "<p>Esto volverá a aplicar la configuración recomendada de Item Piles para Mausritter.</p>" +
-        "<p><strong>Nota:</strong> Sobrescribe los ajustes actuales de Item Piles.</p>";
+    // Hidden flag to avoid overwriting manual settings after first setup
+    game.settings.register(MODULE_ID, "setupDone", {
+      name: game.i18n.localize("IPMR.Settings.SetupDone.Name"),
+      hint: game.i18n.localize("IPMR.Settings.SetupDone.Hint"),
+      scope: "world",
+      config: false,
+      type: Boolean,
+      default: false
+    });
 
-      new Dialog({
-        title: "Item Piles: Mausritter | Restablecer configuración",
-        content: html,
-        buttons: {
-          cancel: { label: "Cancelar" },
-          reset: {
-            label: "Restablecer",
-            callback: async () => {
-              await applyRecommendedSettings({ force: true });
-              ui.notifications.info("Item Piles: Mausritter | Configuración restablecida.");
-            }
-          }
-        },
-        default: "cancel"
-      }).render(true);
+    // World Settings -> Menu
+    game.settings.registerMenu(MODULE_ID, "resetRecommended", {
+      name: game.i18n.localize("IPMR.Menu.Reset.Name"),
+      hint: game.i18n.localize("IPMR.Menu.Reset.Hint"),
+      label: game.i18n.localize("IPMR.Menu.Reset.Label"),
+      icon: "fas fa-rotate-left",
+      restricted: true,
+      type: class ResetMenu extends foundry.applications.api.ApplicationV2 {
+        async render() {
+          const html =
+            `<p>${game.i18n.localize("IPMR.Dialog.Reset.Body1")}</p>` +
+            `<p><strong>${game.i18n.localize("IPMR.Dialog.Reset.WarningLabel")}</strong> ${game.i18n.localize("IPMR.Dialog.Reset.WarningText")}</p>`;
 
-      // No queremos renderizar ventana propia; cerramos al instante
-      return this.close();
-    }
-  }
-});
-    console.log("Item Piles: Mausritter | registered resetRecommended");
+          new Dialog({
+            title: game.i18n.localize("IPMR.Dialog.Reset.Title"),
+            content: html,
+            buttons: {
+              cancel: { label: game.i18n.localize("IPMR.Dialog.Reset.Cancel") },
+              reset: {
+                label: game.i18n.localize("IPMR.Dialog.Reset.Confirm"),
+                callback: async () => {
+                  await applyRecommendedSettings({ force: true });
+                  ui.notifications.info(game.i18n.localize("IPMR.Notifications.ResetDone"));
+                }
+              }
+            },
+            default: "cancel"
+          }).render(true);
+
+          // Do not render an app window
+          return this.close();
+        }
+      }
+    });
+
     console.log("Item Piles: Mausritter | init END");
   } catch (e) {
     console.error("Item Piles: Mausritter | init FAILED", e);
   }
 });
 
+// Ensure actors have pips initialized so currencies work (do not overwrite if present)
 Hooks.on("preCreateActor", (doc, data) => {
   if (game.system.id !== "mausritter") return;
+
   const types = ["character", "hireling", "storage"];
   if (!types.includes(data.type)) return;
 
@@ -125,8 +146,8 @@ Hooks.on("preCreateActor", (doc, data) => {
   }
 });
 
+// One-time setup after everything is ready
 Hooks.once("ready", async () => {
   await applyRecommendedSettings({ force: false });
-  console.log("Item Piles: Mausritter | Listo.");
-
+  console.log("Item Piles: Mausritter | ready");
 });
