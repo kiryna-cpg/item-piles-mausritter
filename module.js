@@ -28,7 +28,7 @@ function recommendedItemPilesSettings() {
     currencies: [
       {
         type: "attribute",
-        name: "Pips",
+        name: game.i18n.localize("IPMR.Currency.Pips"),
         primary: true,
         img: "icons/commodities/gems/gem-rough-cushion-white.webp",
         abbreviation: "{#}P",
