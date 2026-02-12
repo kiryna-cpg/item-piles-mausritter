@@ -1,0 +1,18 @@
+{
+  "id": "item-piles-mausritter",
+  "title": "Item Piles: Mausritter",
+  "description": "Compatibilidad de Item Piles con Mausritter (0.3.21).",
+  "version": "0.0.1",
+  "authors": [{ "name": "Kiryna" }],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.351"
+  },
+  "relationships": {
+    "requires": [
+      { "id": "item-piles", "type": "module" },
+      { "id": "mausritter", "type": "system" }
+    ]
+  },
+  "esmodules": ["module.js"]
+}
