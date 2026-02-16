@@ -1,5 +1,14 @@
 {
   "IPMR": {
+    "Currency": {
+      "Pips": "Pips"
+    },
+    "Tradeable": {
+      "Label": "Tradeable (Item Piles)",
+      "Auto": "Auto",
+      "Yes": "Yes",
+      "No": "No"
+    },
     "Settings": {
       "SetupDone": {
         "Name": "Setup applied",
@@ -16,7 +25,7 @@
     "Dialog": {
       "Reset": {
         "Title": "Item Piles: Mausritter | Reset configuration",
-        "Body1": "This will re-apply the recommended Item Piles settings for Mausritter (currency, item price attribute, pile actor type, and no stacking).",
+        "Body1": "This will re-apply the recommended Item Piles settings for Mausritter.",
         "WarningLabel": "Note:",
         "WarningText": "This overwrites your current Item Piles settings.",
         "Cancel": "Cancel",
@@ -25,9 +34,7 @@
     },
     "Notifications": {
       "ResetDone": "Item Piles: Mausritter | Recommended configuration has been re-applied."
-    },
-    "Currency": {
-      "Pips": "Pips"
     }
   }
 }
+
